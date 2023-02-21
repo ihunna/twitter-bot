@@ -67,7 +67,8 @@ def main():
 
     with open('cookies/cookies.json','r',encoding='utf-8') as cookie_file:
         all_cookies = json.load(cookie_file)["data"]
-    
+        if len(all_cookies) < 1:
+            raise Exception("Empty cookies file, run commenter.py and choose 1 to login users and obtain cookies")
 
     
     while True:
