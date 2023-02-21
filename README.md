@@ -1,7 +1,7 @@
 # TWITTER AUTOMATION BOT
 
 ## Description
-#### A bot to login one or more accounts to twitter, edit one or more profiles, monitor some target accounts, comments on and likes their posts
+#### A bot to login one or more accounts to twitter, edit one or more profiles, monitor some target accounts, comments on and likes their posts and scrapes accounts followings and followers.
 
 ## How to use:
 ### Read instructions.txt
