@@ -304,7 +304,7 @@ def loginusers(proxies,append=False,edit=False):
                 {
                     "username":user.split(',')[0],
                     "password":user.split(',')[1],
-                    "email":user.split(',')[2] if len(users) > 2 else "",
+                    "email":user.split(',')[2] if len(user.split(',')) > 2 else "",
                     "bio_data":bio_data,
                     "proxies":random.choice(proxies),
                     "cookies":guest_tokens,
