@@ -1,0 +1,72 @@
+===== IMPORTANT NOTES =====
+----- You must run "pip install -r requirements.txt" for this script to
+      function (do this again as some modules has been installed).
+
+----- Create two sessions and run both commenter.py and liker.py, to have them
+      working simultaneously
+
+----- Selenium is  used to get a guest token from the browser only, the whole system is
+      based on requests and session requests to the API endpoints.
+
+----- Add the accounts you want to work with in accounts/users.txt like, 
+----- username,password,website url,account name,bio,location,birth day,birth month,birth year
+----- (make sure to add them in this order)
+
+----- When you run commenter.py or liker.py, it'll ask for action limit count, specify
+----- your desired limit
+
+----- Add the images you want to use in images.
+
+----- Add the desired texts in texts.txt.
+
+----- Edit accounts/account_bio.json to fit your need.
+
+
+
+===== FILES =====
+----- commenter.py -----
+----- This file is main file, it starts the main operation 
+      (checking accounts for new posts and commenting if new posts are found)
+      It can also do login and scraping of accounts,
+
+      To login: type "python commenter.py loginusers", it'll login all users and store
+      their cookies for use, so, you can relogin when you want or don't login and use old cookies.
+
+      To scrape users: type "python commenter.py scrapeaccounts", it'll ask for a target account,
+      only the account's username should given, it'll ask for the number of accounts to scrape (min 20),
+      after this, it'll go to target account and scrape users of the specified quantity and store them in accounts/accounts.json.
+
+      You can do both login and scraping at once by typing: python commenter.py loginusers scrapeaccounts 
+      (in no order and it's better to run both at once)
+
+
+----- liker.py -----
+----- This file does the job of liking posts, you can reduce the time constraint for 
+      faster testing, you can go to the liking account's page (one of the accounts you're working with)
+      and go to the liked tab to see all the comments you liked.
+
+
+----- login.py -----
+----- This logs in all accounts in accounts/user.txt, you have to specify weather
+----- to append new loggedin accounts to the already existing cookies file or to overwrite it
+----- y or yes to append, n or no to overwrite
+----- You also have to choose weather or not to edit accounts by entering (n or no) or (y or yes)
+
+----- make_post.py -----
+----- This file holds two functions, uploading_image and make_post, 
+----- can be used seprately or together.
+
+----- scrape_users.py -----
+----- This file does the job of scraping accounts, specify "following" 
+----- or "follower" in the category when prompted
+
+
+----- utils.py -----
+----- This file holds some utility functions like, get_cookies and generate_sensor_data
+
+----- config.py -----
+----- This file holds some configurations
+
+----- requirements.txt -----
+----- This file holds needed requirements for the script to run,
+      run "pip install -r requirements.txt" (must do)
