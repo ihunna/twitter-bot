@@ -25,7 +25,7 @@ def main():
 
 def like_post(all_cookies, actions_limit, proxies):
     try:
-        with open('accounts/accounts.json', 'r+', encoding='utf-8') as f:
+        with open('accounts/accounts.json', 'r+', encoding='utf-8-sig') as f:
             #locking the file 
             msvcrt.locking(f.fileno(), msvcrt.LK_LOCK, 1)
 

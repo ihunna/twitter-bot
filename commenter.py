@@ -79,7 +79,7 @@ def main():
     else:
         raise Exception('No action chosen between (1,2,3)')
 
-    with open('cookies/cookies.json','r',encoding='utf-8') as cookie_file:
+    with open('cookies/cookies.json','r',encoding='utf-8-sig') as cookie_file:
         all_cookies = json.load(cookie_file)["data"]
         if len(all_cookies) < 1:
             raise Exception("Empty cookies file, run commenter.py and choose 1 to login users and obtain cookies")
@@ -305,7 +305,7 @@ def comment(cookies={},tweet={},image_folder="",text="",proxies={},actions_limit
 def loginusers(proxies,append=False,edit=False):
     all_cookies = []
     bio_data = {}
-    with open ('accounts/account_bio.json','r',encoding='utf-8') as bio:
+    with open ('accounts/account_bio.json','r',encoding='utf-8-sig') as bio:
         bio_data = json.load(bio)
 
     with open('accounts/users.txt','r') as users_file:
@@ -337,19 +337,19 @@ def loginusers(proxies,append=False,edit=False):
                 if future.result() is not None:all_cookies.append(future.result())
 
     if append:
-        with open('cookies/cookies.json','r+',encoding='utf-8') as cookies_file:
+        with open('cookies/cookies.json','r+',encoding='utf-8-sig') as cookies_file:
             file_data = json.load(cookies_file)
             file_data["data"] += all_cookies
             cookies_file.seek(0)
             json.dump(file_data,cookies_file,ensure_ascii=False,indent=4,default=str)
     else:
-        with open('cookies/cookies.json','w',encoding='utf-8') as cookies_file:
+        with open('cookies/cookies.json','w',encoding='utf-8-sig') as cookies_file:
             json.dump({"data":all_cookies},cookies_file,ensure_ascii=False,indent=4,default=str)
 
     
 def scrape_accounts(target,limit,proxies,append=False,all_items=True,scrape_type='following'):
     print("\n---------------------------scraping accounts-----------------------------\n")
-    with open('cookies/cookies.json','r',encoding='utf-8') as cookie_file:
+    with open('cookies/cookies.json','r',encoding='utf-8-sig') as cookie_file:
         all_cookies = json.load(cookie_file)["data"]
 
         cookies = random.choice(all_cookies)
