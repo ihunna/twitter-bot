@@ -49,12 +49,26 @@ def main():
         while target == "":
             target = input("Please enter target account: ").strip().lower()
 
-        limit = input("Enter accounts count: ").strip()
-        while limit == "" or not limit.isdigit():
-            limit = input("Please enter accounts count: ").strip()
-        limit = int(limit)
+        print("\nappend new accounts? (Y/n) y for yes, n for no")
+        append = input("Append new account? (Y/n): ").strip().lower()
+        while append not in ("y", "n","yes","no"):
+            append = input("Please enter y or n, yes or no: ").strip().lower()
+        append = True if append in ("y","yes") else False
 
-        scrape_accounts(target,limit,proxies)
+        print(f"\ndo you want to scrape all {target}'s following/followers? (Y/n) y for yes, n for no")
+        all_items = input(f"Do you want to scrape all {target}'s following/followers? (Y/n): ").strip().lower()
+        while all_items not in ("y", "n","yes","no"):
+            all_items = input("please enter y or n, yes or no: ").strip().lower()
+        all_items = True if all_items in ("y","yes") else False
+        
+        if not all_items:
+            limit = input("Enter limit count: ").strip()
+            while limit == "" or not limit.isdigit():
+                limit = input("Please limit count: ").strip()
+        limit = int(limit) if not all_items else 0
+
+
+        scrape_accounts(target,limit,proxies,append=append,all_items=all_items)
         return
 
     elif action == 3:
@@ -333,7 +347,7 @@ def loginusers(proxies,append=False,edit=False):
             json.dump({"data":all_cookies},cookies_file,ensure_ascii=False,indent=4,default=str)
 
     
-def scrape_accounts(target,limit,proxies,scrape_type='following'):
+def scrape_accounts(target,limit,proxies,append=False,all_items=True,scrape_type='following'):
     print("\n---------------------------scraping accounts-----------------------------\n")
     with open('cookies/cookies.json','r',encoding='utf-8') as cookie_file:
         all_cookies = json.load(cookie_file)["data"]
@@ -344,7 +358,8 @@ def scrape_accounts(target,limit,proxies,scrape_type='following'):
                                 cookies['headers'],
                                 target,limit,
                                 type=scrape_type,
-                                proxies=random.choice(proxies))
+                                proxies=random.choice(proxies),
+                                append=append,all_items=all_items)
         if not scraped:
             raise Exception(f"error scraping data {scraped}")
 
